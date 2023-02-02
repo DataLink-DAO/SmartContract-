@@ -26,8 +26,8 @@ contract PublisherNft is ERC721 {
         i_owner = msg.sender;
     }
 
-    function mintNft() public onlyOwner returns (uint256) {
-        _safeMint(msg.sender, s_tokenCounter);
+    function mintNft(address _publisher) public onlyOwner returns (uint256) {
+        _safeMint(_publisher, s_tokenCounter);
         s_tokenCounter++;
         return s_tokenCounter;
     }

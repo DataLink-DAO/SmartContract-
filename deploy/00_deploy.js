@@ -6,8 +6,6 @@ const util = require("util")
 const request = util.promisify(require("request"))
 const { networkConfig } = require("../helper-hardhat-config")
 
-const DEPLOYER_PRIVATE_KEY = network.config.accounts[0]
-
 async function callRpc(method, params) {
     var options = {
         method: "POST",
@@ -27,11 +25,9 @@ async function callRpc(method, params) {
     return JSON.parse(res.body).result
 }
 
-const deployer = new ethers.Wallet(DEPLOYER_PRIVATE_KEY)
-
 module.exports = async ({ deployments }) => {
     const { deploy } = deployments
-
+    const { deployer } = await getNamedAccounts()
     const priorityFee = await callRpc("eth_maxPriorityFeePerGas")
 
     // Wraps Hardhat's deploy, logging errors to console.

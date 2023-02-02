@@ -1,11 +1,10 @@
 const { getNamedAccounts, deployments, network } = require("hardhat")
 const { developmentChains } = require("../helper-hardhat-config")
-const { verify } = require("../utils/verify")
 const util = require("util")
 const request = util.promisify(require("request"))
 
 async function callRpc(method, params) {
-    var options = {
+    let options = {
         method: "POST",
         url: "https://api.hyperspace.node.glif.io/rpc/v1",
         // url: "http://localhost:1234/rpc/v0",
@@ -48,10 +47,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         log: true,
     })
     log(`PublisherNft deployed at ${PublisherNft.address}`)
-
-    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-        await verify(PublisherNft.address, args)
-    }
 }
 
-module.exports.tags = ["all", "PublisherNft", "main"]
+module.exports.tags = ["all", "daoFactory", "main"]

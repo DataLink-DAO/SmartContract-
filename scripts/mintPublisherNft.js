@@ -26,7 +26,12 @@ async function mint() {
     const priorityFee = await callRpc("eth_maxPriorityFeePerGas")
 
     const PublisherNft = await ethers.getContract("PublisherNft", deployer)
-    const PublisherNftMintTx = await PublisherNft.mintNft({ maxPriorityFeePerGas: priorityFee })
+    const PublisherNftMintTx = await PublisherNft.mintNft(
+        "0xb636C663De47df7cf95F1E87C86745dd7f7E3d67",
+        {
+            maxPriorityFeePerGas: priorityFee,
+        }
+    )
     await PublisherNftMintTx.wait(1)
     console.log(`PublisherNft index 0 has tokenURI:${await PublisherNft.tokenURI(0)}`)
     /* const tokenId = mintTxReceipt.events[0].args.tokenId

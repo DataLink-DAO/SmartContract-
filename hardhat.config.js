@@ -12,6 +12,7 @@ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL
 const ETHERSCAN_API_KEY_MUMBAI = process.env.ETHERSCAN_API_KEY_MUMBAI
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
     solidity: {
@@ -43,6 +44,12 @@ module.exports = {
             url: GOERLI_RPC_URL,
             accounts: [PRIVATE_KEY],
             chainId: 5,
+            blockConfirmations: 6,
+        },
+        mumbai: {
+            url: MUMBAI_RPC_URL,
+            accounts: [PRIVATE_KEY],
+            chainId: 80001,
             blockConfirmations: 6,
         },
     },
